@@ -14,6 +14,11 @@ class MessagesController extends Controller
     //         'message' => $message
     //     ]);
     // }
+
+    /**
+     * este metodo sirve para manejar errores 404
+     * en caso de no encontrar el mensaje por id 
+     */
     public function show(Message $message){
 
         return view('messages.show', [
