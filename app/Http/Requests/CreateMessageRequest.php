@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Esta clase es epecial para validar peticiones de formularios
  * que tienen muchos campos y muchas reglas de validadcion
+ * php artisan make:request NombreRequest
  */
 class CreateMessageRequest extends FormRequest
 {
