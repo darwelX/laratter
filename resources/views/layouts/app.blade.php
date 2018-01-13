@@ -7,6 +7,12 @@
 
       <title>@yield('title', 'Laratter by Platzi')</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+      <style type="text/css" rel="stylesheet">
+        .panel{
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+      </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
