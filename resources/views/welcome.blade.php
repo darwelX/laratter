@@ -56,5 +56,11 @@
     @empty
         <p>No hay mesajes destacados</p>
     @endforelse
+
+    <div class="mt-2 mx-auto">
+        @if(count($messages))
+            {{$messages->links('pagination::bootstrap-4')}}
+        @endif
+    </div>
   </div>
 @endsection
