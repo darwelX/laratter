@@ -11,6 +11,8 @@ use Faker\Generator as Faker;
 | your application. Factories provide a convenient way to generate new
 | model instances for testing / seeding your application's database.
 |
+| COMO UTILIZAR EN EL tinker
+| php artisan tinker >>> factory(App\Message::class)->create()
 */
 
 $factory->define(App\Message::class, function (Faker $faker){
