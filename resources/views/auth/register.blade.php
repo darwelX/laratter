@@ -30,6 +30,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('name') ? ' has-danger': ''}}">
+                            <div class="col-md-10 offset-md-3">
+                                <label for="username" class="col-md-5 form-control-label">Nombre de Usuario</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="username" id="username" class="form-control" value="{{old('username')}}">
+                                    @if ($errors->has('username'))
+                                        <span class="form-control-feedback">
+                                            <strong>{{$errors->first('username')}}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
 
                             <div class="col-md-10 offset-md-3">
