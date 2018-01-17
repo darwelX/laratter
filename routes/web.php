@@ -13,6 +13,7 @@
 
 Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessagesController@show');
-Route::post('/messages/create', 'MessagesController@create');
+// antes de llegar al controlador va a existir middleware de filtro y va a asegurarse de que este autenticado
+Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes();
