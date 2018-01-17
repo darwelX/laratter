@@ -16,8 +16,12 @@ class DatabaseSeeder extends Seeder
         // crea 100 instancias de mensajes
         // factory(App\Message::class, 100)->create();
         // crea 100 registros en la base de datos de la clase Message
-        factory(App\Message::class)
-            ->times(100)
-            ->create();
+        factory(App\User::class, 50)->create()->each(function(App\User $user){
+            factory(App\Message::class)
+                ->times(20)
+                ->create([
+                    'user_id' => $user->id,
+                ]);
+        });
     }
 }
