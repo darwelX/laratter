@@ -28,6 +28,8 @@ $factory->define(App\Message::class, function (Faker $faker){
         // retorna texto basado en un libro (alicia en el pais de las maravillas)
         // 'content' => $faker->realText()
         'content' => $faker->realText(random_int(20, 160)),
-        'image'   => $faker->imageUrl(600, 300)
+        'image'   => $faker->imageUrl(600, 300),
+        'created_at' => $faker->dateTimeThisDecade,
+        'updated_at' => $faker->dateTimeThisDecade,
     ];
 });
