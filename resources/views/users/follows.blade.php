@@ -10,7 +10,10 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach($follows as $follow)
-                        <li class="list-group-item">{{$follow->username}}</li>
+                        <li class="list-group-item">
+                            <img src="{{$follow->avatar}}" alt="" class="rounded-circle img-fluid avatar mr-2">
+                            {{$follow->username}}
+                        </li>
                     @endforeach       
                 </ul>
             </div>
