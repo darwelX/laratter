@@ -11,7 +11,9 @@
                 <ul class="list-group list-group-flush">
                     @foreach($follows as $follow)
                         <li class="list-group-item">
-                            <img src="{{$follow->avatar}}" alt="" class="rounded-circle img-fluid avatar mr-2">
+                            <a href="/{{$follow->username}}">
+                                <img src="{{$follow->avatar}}" alt="{{$follow->username}}" class="rounded-circle img-fluid avatar mr-2">
+                            </a>            
                             {{$follow->username}}
                         </li>
                     @endforeach       
