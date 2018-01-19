@@ -64,6 +64,11 @@
                                     Olvido su Password?
                                 </a>
                             </div>
+                            <div class="col-md-5 offset-md-3 pt-2">
+                                <a href="/auth/facebook" class="btn btn-primary btn-block">
+                                    <span class="fa fa-facebook mr-2"></span>Login con Facebook
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
