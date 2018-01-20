@@ -53,4 +53,11 @@ class User extends Authenticatable
         return $this->follows->contains($user);
     }
 
+    /**
+     * Un usuario tiene muchos perfiles (google plus, facebook, twiter..)
+     */
+    public function socialProfiles()
+    {
+        return $this->hasMany(\App\SocialProfile::class);
+    }
 }
