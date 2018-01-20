@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+/**
+ * php artisan make:migration add_user_id_column_to_messages_table --table messages
+ */
 class AddUserIdColumnToMessagesTable extends Migration
 {
     /**
