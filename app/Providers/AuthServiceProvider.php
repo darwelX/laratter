@@ -25,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        // Gate es la definicion de una compuerta o acceso
         // se utiliza para definir un metodo que me permita saber si entre dos usuarios se guiguen mutuamente
         Gate::define('dms', function(User $user, User $other){
             return $user->isFollowing($other) && $other->isFollowing($user);
