@@ -10,6 +10,19 @@
   Seguido por <span class="badge badge-pill badge-info">{{ $user->follows->count()}}</span>
 </a>
   @if(Auth::check())
+
+    @if(Gate::allows('dms', $user))
+      <form action="/{{$user->username}}/dms" method="post" class="mt-2">
+          <div class="form-group">
+            <input type="text" name="message" id="message" class="form-control" placeholder="Enviar mensaje..">
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Enviar DM</button>
+          </div>
+      </form>
+    @endif
+
     @if(Auth::user()->isFollowing($user))
       <form action="/{{$user->username}}/unfollow" method="post" class="mb-2 mt-2">
         {{ csrf_field() }}
