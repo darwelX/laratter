@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Message;
+use App\Conversation;
+use App\PrivateMessage;
 use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
@@ -57,6 +59,50 @@ class UsersController extends Controller
         $yo->follows()->detach($user);
 
         return redirect("/$username")->withSuccess('Usuario no seguido!');
+    }
+
+    /**
+     * Se envia un mensaje privado al $username, teniendo como remitente
+     * el usuario loguiado
+     */
+    public function sendPrivateMessage($username, Request $request)
+    {   
+        // usuario al que se le envia el mensaje
+        $user = $this->findByUsername($username);
+        // usuario autenticado
+        $yo = $request->user();
+        // mensaje de texto a enviar
+        $message = $request->input('message');
+
+        $conversation = Conversation::between($yo, $user);
+
+        // codigo sin el between
+        // $conversation = Conversation::create();
+        // $conversation->users()->attach($yo);
+        // $conversation->users()->attach($user);
+
+        $privateMessage = PrivateMessage::create([
+            'conversation_id' => $conversation->id,
+            'user_id' => $yo->id,
+            'message' => $message,
+        ]);
+
+        return redirect('/conversations/'.$conversation->id);
+    }
+
+
+    /**
+     * si recive como parametro un id por medio de la ruta y el parametro es una clase
+     * este la busca y la retorna en un objeto que representa el modelo
+     */
+    public function showConversation(Conversation $conversation)
+    {
+        $conversation->load('users', 'privateMessages');
+        // dd($conversation);
+        return view('users.conversation', [
+            'conversation' => $conversation,
+            'user' => auth()->user(),
+        ]);
     }
 
     private function findByUsername($username)
