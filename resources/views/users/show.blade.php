@@ -13,6 +13,7 @@
 
     @if(Gate::allows('dms', $user))
       <form action="/{{$user->username}}/dms" method="post" class="mt-2">
+          {{ csrf_field() }}
           <div class="form-group">
             <input type="text" name="message" id="message" class="form-control" placeholder="Enviar mensaje..">
           </div>
