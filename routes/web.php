@@ -13,16 +13,22 @@
 
 Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessagesController@show');
+// Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 // antes de llegar al controlador va a existir middleware de filtro y va a asegurarse de que este autenticado
-Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes();
 Route::get('/auth/facebook', 'SocialAuthController@facebook');
 Route::get('/auth/facebook/callback', 'SocialAuthController@callback');
 Route::post('/auth/facebook/register', 'SocialAuthController@register');
 
+Route::group(['middleware' => 'auth'], function(){
+  Route::post('/{username}/dms', 'UsersController@sendPrivateMessage');
+  Route::get('/conversations/{conversation}', 'UsersController@showConversation');
+  Route::post('/{username}/follow', 'UsersController@follow');
+  Route::post('/{username}/unfollow', 'UsersController@unfollow');
+  Route::post('/messages/create', 'MessagesController@create');
+});
+
 Route::get('/{username}/follows', 'UsersController@follows');
 Route::get('/{username}/followed', 'UsersController@followers');
-Route::post('/{username}/follow', 'UsersController@follow');
-Route::post('/{username}/unfollow', 'UsersController@unfollow');
 Route::get('/{username}', 'UsersController@show');
