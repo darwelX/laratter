@@ -16,4 +16,17 @@ class Message extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * El atributo image del modelo llamara a este metodo en lugar del valor de la propiedad
+     */
+    public function getImageAttribute($image)
+    {
+        if (!$image || \starts_with($image, 'http'))
+        {
+            return $image;
+        }
+
+        return \Storage::disk('public')->url($image);
+    }
 }
