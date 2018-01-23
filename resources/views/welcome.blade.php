@@ -17,7 +17,7 @@
                 <div class="card-header">
                     <div class="card-title">Nuevo</div>
                 </div>
-                <form action="/messages/create" method="post"> 
+                <form action="/messages/create" method="post" enctype="multipart/form-data"> 
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="contenido">
@@ -35,6 +35,7 @@
                         @endif
                         <textarea name="contenido" id="contenido" class="form-control @if($errors->has('contenido')) is-invalid @endif" cols="30" rows="5" placeholder="Que estas pensando?"></textarea>
                         <!-- <div class="invalid-feedback">Error</div> -->
+                        <input type="file" name="image" id="image" class="form-control-file pt-2">
                     </div>
 
                     <div class="form-group">
