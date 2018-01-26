@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 class UsersController extends Controller
 {
     public function show($username){
+        // throw new \Exception('Simulando une error 500');
         // se esta utilizando query builder
         $user = $this->findByUsername($username);
         $messages = Message::where('user_id', $user->id)->paginate(10);
@@ -107,6 +108,7 @@ class UsersController extends Controller
 
     private function findByUsername($username)
     {
-        return User::where('username', $username)->first();
+        // firstOrFail si no lo encuentra retorna un error 404
+        return User::where('username', $username)->firstOrFail();
     }
 }
