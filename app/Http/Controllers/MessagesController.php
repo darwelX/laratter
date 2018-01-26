@@ -50,7 +50,8 @@ class MessagesController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $messages = Message::where('content', 'LIKE', "%$query%")->get();
+        // con with mejora el rendimeinto de la consulta ya que hace un solo query para traer todos los usuarios
+        $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
 
         return view('messages.index', [
             'messages' => $messages,
