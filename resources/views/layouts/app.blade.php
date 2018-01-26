@@ -27,6 +27,19 @@
 
             <div class="collapse navbar-collapse">
             <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form action="/messages">
+                        <div class="input-group">
+                            <input type="text" name="query" id="query" class="form-control" required placeholder="Buscar...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-outline-success">Buscar</button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
