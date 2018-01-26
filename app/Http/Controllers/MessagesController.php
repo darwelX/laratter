@@ -51,7 +51,9 @@ class MessagesController extends Controller
     {
         $query = $request->input('query');
         // con with mejora el rendimeinto de la consulta ya que hace un solo query para traer todos los usuarios
-        $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
+        $messages = Message::search($query)->get();
+        $messages->load('user');
+        // $messages = Message::with('user')->where('content', 'LIKE', "%$query%")->get();
 
         return view('messages.index', [
             'messages' => $messages,
