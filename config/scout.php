@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // php artisan scout:import"App\Message"
+    // php artisan scout:import "App\Message"
     /*
     |--------------------------------------------------------------------------
     | Default Search Engine
