@@ -7,6 +7,7 @@ use App\User;
 use App\Message;
 use App\Conversation;
 use App\PrivateMessage;
+use App\Notifications\UserFollowed;
 use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
@@ -49,7 +50,7 @@ class UsersController extends Controller
         $yo = $request->user();
         
         $yo->follows()->attach($user);
-        
+        $user->notify(new UserFollowed($yo));
         return redirect("/$username")->withSuccess('Usuario seguido!');
     }
 
