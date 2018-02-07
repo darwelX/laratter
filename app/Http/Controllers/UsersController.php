@@ -112,4 +112,8 @@ class UsersController extends Controller
         // firstOrFail si no lo encuentra retorna un error 404
         return User::where('username', $username)->firstOrFail();
     }
+
+    public function notifications(Request $request){
+        return $request->user()->notifications;
+    }
 }
