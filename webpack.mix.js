@@ -13,7 +13,6 @@ let mix = require('laravel-mix');
 
 mix.js([
   'node_modules/jquery/dist/jquery.min.js',
-  'node_modules/vue/dist/vue.min.js',
   'node_modules/tether/dist/js/tether.min.js',
   'node_modules/bootstrap/dist/js/bootstrap.js', 
   'resources/assets/js/prueba.js',
@@ -22,7 +21,6 @@ mix.js([
 .sass('resources/assets/sass/app.scss', 'public/css/app.css');
 
 mix.autoload({
-  vue: ['vue', 'window.Vue'],
   jquery: ['$', 'jQuery', 'window.jQuery'],
   tether: ['Tether', 'window.Tether']
 });
