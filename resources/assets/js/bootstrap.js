@@ -1,6 +1,6 @@
 
 window._ = require('lodash');
-window.Tether = required('tether');
+window.Tether = require('tether');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -43,13 +43,13 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
+import Echo from 'laravel-echo'
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key',
-//     cluster: 'mt1',
-//     encrypted: true
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'f58f4aa02c5b0f981e53',
+    cluster: 'us2',
+    encrypted: true
+});
