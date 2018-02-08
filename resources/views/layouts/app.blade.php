@@ -42,12 +42,21 @@
             </ul>
             
             <ul class="navbar-nav ml-auto">
+
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Sign In</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
                 @else
+                    <li class="nav-item dropdown mr-2">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            Notificaciones <span class="caret"></span>
+                        </a>
+                        <notifications :user="{{ Auth::user()->id }}"></notifications>                      
+                    </li>    
+
                     <li class="nav-item dropdown">
+
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
