@@ -49,9 +49,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
                 @else
                     <li class="nav-item dropdown mr-2">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                             Notificaciones <span class="caret"></span>
-                        </a>
+                        </button>
                         <notifications :user="{{ Auth::user()->id }}"></notifications>                      
                     </li>    
 
