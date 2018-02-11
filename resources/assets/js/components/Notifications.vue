@@ -1,8 +1,12 @@
 <template>
 	<div class="dropdown-menu">
-		<a :href="'/' + notification.data.follower.username" class="dropdown-item" v-for="notification in notifications">
+		<a :href="'/' + notification.data.follower.username" class="dropdown-item bg-success text-white" v-for="notification in notifications">
 			@{{ notification.data.follower.username }} te ha seguido!
 		</a>
+        <div class="dropdown-divider"></div>
+		<a :href="'/' + notification.data.follower.username" class="dropdown-item" v-for="notification in notificationsLeidas">
+			@{{ notification.data.follower.username }} te ha seguido!
+		</a>        
 	</div>
 </template>
 
@@ -11,19 +15,31 @@
       props: ['user'],
       data(){
           return {
-              notifications: []
+              notifications: [],
+              notificationsLeidas: []
           }
       },
 
       mounted(){
-          axios.get('/api/notifications')
+          axios.get('/api/notifications/read')
             .then(response => {
-                this.notifications = response.data;
-                console.log(this.notifications);
-                Echo.private(`App.User.${this.user}`)
-                    .notification(notification =>{
-                        this.notification.unshift(notification);
+                let size = response.data.length;
+                let longitud = (size>3) ? 3 : size;
+                this.notificationsLeidas = (size>0)? response.data.slice(0, longitud):[];                
+                axios.get('/api/notifications')
+                    .then(response =>{
+                        this.notifications = response.data;
+                        Echo.private(`App.User.${this.user}`)
+                            .notification(notification =>{
+                                this.notification.unshift(notification);
+                            });  
                     });
+                    Echo.private(`App.User.${this.user}`)
+                        .notification(notification =>{
+                            this.notificationsLeidas.unshift(notification);
+                        });
+
+
             });
       }
   }
