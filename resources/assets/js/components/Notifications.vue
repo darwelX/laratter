@@ -1,10 +1,10 @@
 <template>
 	<div class="dropdown-menu">
-		<a :href="'/' + notification.data.follower.username" class="dropdown-item bg-success text-white" v-for="notification in notifications">
+		<a v-bind:key="notification.data.id" :href="'/' + notification.data.follower.username" class="dropdown-item bg-success text-white" v-for="notification in notifications">
 			@{{ notification.data.follower.username }} te ha seguido!
 		</a>
         <div class="dropdown-divider"></div>
-		<a :href="'/' + notification.data.follower.username" class="dropdown-item" v-for="notification in notificationsLeidas">
+		<a v-bind:key="notification.data.id" :href="'/' + notification.data.follower.username" class="dropdown-item" v-for="notification in notificationsLeidas">
 			@{{ notification.data.follower.username }} te ha seguido!
 		</a>        
 	</div>
