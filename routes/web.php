@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function(){
   Route::post('/messages/create', 'MessagesController@create');
 
   Route::get('/api/notifications', 'UsersController@notifications');
+  Route::get('/api/notifications/read', 'UsersController@notificationsRead');
 });
 
 Route::get('/{username}/follows', 'UsersController@follows');
