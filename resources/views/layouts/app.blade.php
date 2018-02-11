@@ -32,9 +32,9 @@
                 <li class="nav-item">
                     <form action="/messages">
                         <div class="input-group">
-                            <input type="text" name="query" id="query" class="form-control" required placeholder="Buscar...">
+                            <input type="text" name="query" id="query" class="form-control" required placeholder="{{trans('app.search')}}...">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-success">Buscar</button>
+                                <button class="btn btn-outline-success">@lang('app.search')</button>
                             </span>
                         </div>
                     </form>
@@ -42,7 +42,20 @@
             </ul>
             
             <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown mr-3">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            ({{App::getLocale()}})&nbsp;Language<span class="caret"></span>
+                        </a>
 
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/locale?lang=es">
+                                Español
+                            </a>
+                            <a class="dropdown-item" href="/locale?lang=en">
+                                English
+                            </a>
+                        </div>
+                    </li>
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Sign In</a></li>
