@@ -114,6 +114,12 @@ class UsersController extends Controller
     }
 
     public function notifications(Request $request){
-        return $request->user()->notifications;
+        $notifications = $request->user()->unreadNotifications;
+        $request->user()->unreadNotifications->markAsRead();
+        return $notifications;
+    }
+
+    public function notificationsRead(Request $request){
+        return $request->user()->readNotifications;
     }
 }
