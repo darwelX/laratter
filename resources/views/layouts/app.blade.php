@@ -44,7 +44,13 @@
             <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown mr-3">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                            ({{App::getLocale()}})&nbsp;Language<span class="caret"></span>
+                            @if(App::isLocale('en')) 
+                                <img src="{{asset('img/country/us.png')}}"></img> 
+                            @else 
+                                <img src="{{asset('img/country/es.png')}}"></img> 
+                            @endif                            
+                            ({{App::getLocale()}})&nbsp;
+                            Language<span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu">
