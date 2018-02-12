@@ -24,3 +24,5 @@ mix.autoload({
   jquery: ['$', 'jQuery', 'window.jQuery'],
   tether: ['Tether', 'window.Tether']
 });
+
+mix.copyDirectory('resources/assets/img', 'public/img');
