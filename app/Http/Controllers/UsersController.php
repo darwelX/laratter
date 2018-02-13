@@ -122,4 +122,33 @@ class UsersController extends Controller
     public function notificationsRead(Request $request){
         return $request->user()->readNotifications;
     }
+
+    public function changestate($username)
+    {
+        $user = $this->findByUsername($username);
+        $user->private = !$user->private;
+        $user->save();
+        if($user->private)
+        {
+            return __('app.private');
+        }else
+        {
+            return __('app.public');
+        }
+    }
+
+    public function stateprivate($username)
+    {
+        $user = $this->findByUsername($username);
+        $state['value'] = $user->private;
+        if($user->private)
+        {
+            $state['state'] =  __('app.private');
+            return $state;
+        }else
+        {
+            $state['state'] =  __('app.public');
+            return $state;
+        }
+    }
 }
