@@ -1,5 +1,7 @@
 <?php
   return [
-    'search' => 'Buscar'
+    'search' => 'Buscar',
+    'private' => 'Privado',
+    'public' => 'Publico'
   ];
 ?>
