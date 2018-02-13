@@ -8,6 +8,8 @@
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+@import "check";
+
 .card.panel{
   padding: 1em;
   margin-bottom: 1em;
@@ -16,4 +18,16 @@
 .avatar{
   width: 75px;
   height: 75px;
+}
+
+.avatar-medium{
+  width: 140px;
+  height: 140px;
+}
+
+.private {
+  display: flex;
+  align-items: center;
+  color: cadetblue;
+  font-size: 1.5em;
 }
