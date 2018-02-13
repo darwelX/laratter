@@ -2,6 +2,7 @@
   return [
     'search' => 'Buscar',
     'private' => 'Privado',
-    'public' => 'Publico'
+    'public' => 'Público',
+    'profile' => 'Perfil',
   ];
 ?>

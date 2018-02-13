@@ -3,5 +3,6 @@
     'search' => 'Search',
     'private' => 'Private',
     'public' => 'Public',
+    'profile' => 'Profile',
   ];
 ?>
