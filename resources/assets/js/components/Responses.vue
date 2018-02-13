@@ -1,7 +1,7 @@
 <template>
   <div class="row">
       <a href="#" class="btn btn-outline-primary" v-on:click="load">Ver respuestas</a>
-      <div class="mt-2 col-12" v-for="response in responses">
+      <div class="mt-2 col-12" v-bind:key="response.id" v-for="response in responses">
             <div class="card">
                 <div class="card-block">
                         {{response.message}}
