@@ -1,11 +1,19 @@
 <template>
     <div class="private">
-      <label class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" v-on:click="chage" v-if="value" checked>
-        <input type="checkbox" class="custom-control-input" v-on:click="chage" v-if="!value">
-        <span class="custom-control-indicator"></span>
-        {{message}}
-      </label>
+      <table>
+          <tr>
+            <td>
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" v-on:click="chage" v-if="value" checked>
+                    <input type="checkbox" class="custom-control-input" v-on:click="chage" v-if="!value">
+                    <span class="custom-control-indicator"></span>
+                </label>
+            </td>
+            <td class="pt-self">
+                {{message}}
+            </td>
+          </tr>
+      </table>
     </div>
 </template>
 
