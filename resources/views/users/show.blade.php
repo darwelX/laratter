@@ -1,25 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row mt-2">
-  <div class="col-2">
-    <img class="card-img-top rounded-circle img-fluid avatar-medium" src="{{$user->avatar}}" alt="{{$user->name}}">
+  <div class="row mt-2">
+    <div class="col-2">
+      <img class="card-img-top rounded-circle img-fluid avatar-medium" src="{{$user->avatar}}" alt="{{$user->name}}">
+    </div>
+    <div class="col-8">
+      <h1 class="mt-5">{{$user->name}}</h1>
+      @if(Auth::user()->username == $user->username)
+        <private :username="'{{$user->username}}'"></private>
+      @endif
+    </div>
   </div>
-  <div class="col-8">
-    <h1 class="mt-5">{{$user->name}}</h1>
-    <private :username="'{{$user->username}}'"></private>
-  </div>
-</div>
-<div class="row mt-2">
-  <div class="col-12">
-    <a href="/{{$user->username}}/follows">
-      Sigue a <span class="badge badge-pill badge-success">{{ ($user->follows->count()>0)? $user->follows->count() : 0 }}</span>
-    </a>
-    <a href="/{{$user->username}}/followed">
-      Seguido por <span class="badge badge-pill badge-info">{{ $user->follows->count()}}</span>
-    </a>
-  </div>
-</div>
+  @if($user->username == Auth::user()->username)
+    <div class="row mt-2">
+      <div class="col-12">
+        <a href="/{{$user->username}}/follows">
+          Sigue a <span class="badge badge-pill badge-success">{{ ($user->follows->count()>0)? $user->follows->count() : 0 }}</span>
+        </a>
+        <a href="/{{$user->username}}/followed">
+          Seguido por <span class="badge badge-pill badge-info">{{ $user->follows->count()}}</span>
+        </a>
+      </div>
+    </div>
+  @endif
 
   @if(Auth::check())
 
@@ -55,19 +59,22 @@
     @endif
   @endif <!-- fin de usuario autenticado -->
 
-<div class="row mt-3">
-@forelse($messages as $message)
-    <div class="col-6">
-      @include('messages.message')
-    </div>
-@empty
-    <p>No hay mensajes</p>
-@endforelse
-    <div class="mt-2 mx-auto">
-      @if(count($messages))
-        {{$messages->links('pagination::bootstrap-4')}}
-      @endif
-    </div>
-</div>
+  @if(Auth::user()->username == $user->username)
+    @include('messages.listmessage')
+  @elseif(!$user->private)
+    @include('messages.listmessage')
+  @else
+    @if(Gate::allows('dms', $user))
+      @include('messages.listmessage')
+    @else
+      <div class="jumbotron">
+        <h1 class="display-3 text-center">@lang('app.profile_private')!</h1>
+        <hr class="my-4">
+        <p class="lead text-center">
+          <span class="fa fa-lock color-icon fa-5x"></span>
+        </p>
+      </div>
+    @endif
+  @endif
 
 @endsection
