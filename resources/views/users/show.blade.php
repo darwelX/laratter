@@ -7,7 +7,7 @@
     </div>
     <div class="col-8">
       <h1 class="mt-5">{{$user->name}}</h1>
-      @if(Auth::user()->username == $user->username)
+      @if(Gate::allows('equals', $user))
         <private :username="'{{$user->username}}'"></private>
       @endif
     </div>
@@ -48,7 +48,7 @@
         @endif
         <button class="btn btn-danger">Dejar de Seguir</button>
       </form>
-    @elseif(Auth::user()->username != $user->username)
+    @elseif(Gate::denies('equals', $user))
       <form action="/{{$user->username}}/follow" method="post" class="mb-2 mt-2">
         {{ csrf_field() }}
         @if(session('success'))
@@ -59,9 +59,7 @@
     @endif
   @endif <!-- fin de usuario autenticado -->
 
-  @if(Auth::user()->username == $user->username)
-    @include('messages.listmessage')
-  @elseif(!$user->private)
+  @if(Gate::allows('equals', $user) or !$user->private)
     @include('messages.listmessage')
   @else
     @if(Gate::allows('dms', $user))
