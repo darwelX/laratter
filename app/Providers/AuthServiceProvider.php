@@ -27,8 +27,16 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         // Gate es la definicion de una compuerta o acceso
         // se utiliza para definir un metodo que me permita saber si entre dos usuarios se guiguen mutuamente
+        /**
+         * @$user : es el usuario autenticado, por tanto no es necesario enviarlo y que lo toma de la session
+         * @$other : es el usuario distinto al autenticado y este se envia por parametro
+         */
         Gate::define('dms', function(User $user, User $other){
             return $user->isFollowing($other) && $other->isFollowing($user);
+        });
+
+        Gate::define('equals', function(User $user, User $other){
+            return ( $user->username == $other->username ) && ( $user->id == $other->id);
         });
         //
     }
