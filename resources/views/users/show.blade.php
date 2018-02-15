@@ -12,7 +12,7 @@
       @endif
     </div>
   </div>
-  @if($user->username == Auth::user()->username)
+  @if(Gate::allows('equals', $user))
     <div class="row mt-2">
       <div class="col-12">
         <a href="/{{$user->username}}/follows">
@@ -27,7 +27,7 @@
 
   @if(Auth::check())
 
-    @if(Gate::allows('dms', $user))
+    @if(Gate::allows('dms', $user) and Gate::denies('equals', $user))
       <form action="/{{$user->username}}/dms" method="post" class="mt-2">
           {{ csrf_field() }}
           <div class="form-group">
@@ -57,22 +57,21 @@
         <button class="btn btn-primary">Seguir</button>
       </form>    
     @endif
+
   @endif <!-- fin de usuario autenticado -->
 
   @if(Gate::allows('equals', $user) or !$user->private)
     @include('messages.listmessage')
+  @elseif(Gate::allows('dms', $user))
+    @include('messages.listmessage')
   @else
-    @if(Gate::allows('dms', $user))
-      @include('messages.listmessage')
-    @else
-      <div class="jumbotron">
-        <h1 class="display-3 text-center">@lang('app.profile_private')!</h1>
-        <hr class="my-4">
-        <p class="lead text-center">
-          <span class="fa fa-lock color-icon fa-5x"></span>
-        </p>
-      </div>
-    @endif
+    <div class="jumbotron">
+      <h1 class="display-3 text-center">@lang('app.profile_private')!</h1>
+      <hr class="my-4">
+      <p class="lead text-center">
+        <span class="fa fa-lock color-icon fa-5x"></span>
+      </p>
+    </div>
   @endif
 
 @endsection
