@@ -26,21 +26,20 @@
                 let size = response.data.length;
                 let longitud = (size>3) ? 3 : size;
                 this.notificationsLeidas = (size>0)? response.data.slice(0, longitud):[];                
-                axios.get('/api/notifications')
+                Echo.private(`App.User.${this.user}`)
+                    .notification(notification =>{
+                        this.notificationsLeidas.unshift(notification);
+                    });
+            });
+
+            axios.get('/api/notifications')
                     .then(response =>{
                         this.notifications = response.data;
                         Echo.private(`App.User.${this.user}`)
                             .notification(notification =>{
-                                this.notification.unshift(notification);
+                                this.notifications.unshift(notification);
                             });  
                     });
-                    Echo.private(`App.User.${this.user}`)
-                        .notification(notification =>{
-                            this.notificationsLeidas.unshift(notification);
-                        });
-
-
-            });
       }
   }
 </script>
