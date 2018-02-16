@@ -75,7 +75,7 @@ class UsersController extends Controller
         $yo = $request->user();
         // mensaje de texto a enviar
         $message = $request->input('message');
-
+        //pregunta si existe una conversacion entre ambos usuarios
         $conversation = Conversation::between($yo, $user);
 
         // codigo sin el between
