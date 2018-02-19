@@ -49,9 +49,16 @@ class UsersController extends Controller
         
         $yo = $request->user();
         
-        $yo->follows()->attach($user);
-        $user->notify(new UserFollowed($yo));
-        return redirect("/$username")->withSuccess('Usuario seguido!');
+        if(!$user->private)
+        {
+            $yo->follows()->attach($user);
+            $user->notify(new UserFollowed($yo));
+            return redirect("/$username")->withSuccess('Usuario seguido!');
+        }else {
+            $yo->invitations()->attach($user);
+            return redirect("/$username")->withSuccess('Invitación enviada!');
+        }
+
     }
 
     public function unfollow($username, Request $request)
