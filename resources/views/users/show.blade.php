@@ -49,13 +49,20 @@
         <button class="btn btn-danger">Dejar de Seguir</button>
       </form>
     @elseif(Gate::denies('equals', $user))
-      <form action="/{{$user->username}}/follow" method="post" class="mb-2 mt-2">
-        {{ csrf_field() }}
-        @if(session('success'))
+      @if(Auth::user()->isInvitation($user))
+        <div class="form-group mt-2">
           <span class="text-success">{{ session('success') }}</span>
-        @endif
-        <button class="btn btn-primary">Seguir</button>
-      </form>    
+          <button class="btn btn-secondary btn-lg" disabled>@lang('app.invitationPending')</button>
+        </div>
+      @elseif(Auth::user()->notInvitation($user))
+        <form action="/{{$user->username}}/follow" method="post" class="mb-2 mt-2">
+          {{ csrf_field() }}
+          @if(session('success'))
+            <span class="text-success">{{ session('success') }}</span>
+          @endif
+          <button class="btn btn-primary">Seguir</button>
+        </form>    
+      @endif
     @endif
 
   @endif <!-- fin de usuario autenticado -->
